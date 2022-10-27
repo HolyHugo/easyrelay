@@ -92,7 +92,7 @@ class Procedure
         switch ($this->risqueHemorragique) {
             case self::RISQUE_HEMO_FAIBLE:
                 $inOp = [
-                    'description' => "Pas d'AOD le matin de l'intervnetion.",
+                    'description' => "Pas d'AOD le matin de l'intervention.",
                 ];
                 break;
             case self::RISQUE_HEMO_MODERE_ELEVE:
