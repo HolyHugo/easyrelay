@@ -27,13 +27,14 @@
                     <label class="flexed-l">Date d'intervention
                         <input id="date_intervention" type="date" name="date_intervention" required />
                     </label>
-                    <label for="type-aod"> Traitement </label>
-                    <select name="type-aod" id="traitement">
+                    <label for="type-ac"> Traitement </label>
+                    <select name="type-ac" id="traitement">
                         <option data-placeholder="true"></option>
                         <optgroup label="AOD">
-                            <option value="AOD-3">Eliquis</option>
-                            <option value="AOD-2">Pradaxa</option>
-                            <option value="AOD-1">Xarelto</option>
+                            <option value="AOD-dabigatran">Dabigatran</option>
+                            <option value="AOD-eliquis">Eliquis</option>
+                            <option value="AOD-pradaxa">Pradaxa</option>
+                            <option value="AOD-xarelto">Xarelto</option>
                         </optgroup>
                         <optgroup label="AVK">
                             <option value="AVK-3">Previscam</option>
