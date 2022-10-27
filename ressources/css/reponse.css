@@ -1,0 +1,9 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-image: url('/ressources/assets/texture3.png');
+}

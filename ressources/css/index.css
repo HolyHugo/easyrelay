@@ -1,0 +1,62 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-image: url('/ressources/assets/texture3.png');
+}
+
+.flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-item {
+    background-color: rgb(73, 145, 129);
+    padding: 5px;
+    margin: 10px;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+}
+
+#recherche-bloc {
+    min-width: 450px;
+}
+
+.h-elem {
+    height: 0;
+    padding: 0;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.s-elem {
+    visibility: visible;
+    transition: opacity 0.3s linear;
+    height: auto;
+    padding: .5em;
+}
+
+fieldset {
+    text-align: justify;
+}
+
+.flexed-l {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 400px;
+}
+
+input{
+    flex: 0 0 200px;
+    margin-left: 10px;
+}
