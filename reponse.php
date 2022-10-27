@@ -46,6 +46,7 @@ $procedure = new Procedure(
 $infos = $procedure->getInformations();
 $arret = $infos['preOp'];
 $inOp = $infos['inOp'];
+$reprise = $infos['postOp'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,11 +83,14 @@ $inOp = $infos['inOp'];
                         <p><?= $inOp['description'] ?></p>
                     </div>
                 </div>
-                <div class="timeline__item">
-                    <div class="timeline__content">
-                        Reprise anti-coagulant
+                <?php if ($reprise['reprise']) : ?>
+                    <div class="timeline__item">
+                        <div class="timeline__content">
+                            Reprise anti-coagulant à <?= $reprise['l-reprise'] ?>
+                            <p><?= $reprise['description'] ?></p>
+                        </div>
                     </div>
-                </div>
+                <?php endif ?>
             </div>
         </div>
     </div>

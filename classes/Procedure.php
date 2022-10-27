@@ -49,12 +49,13 @@ class Procedure
             case "AOD":
                 $preOpInfos = $this->preOpAOD();
                 $inOpInfos = $this->inOpAOD();
+                $postOpInfos = $this->postOpAOD();
                 break;
 
             case "AVK":
                 break;
         }
-        return ['preOp' => $preOpInfos, 'inOp' => $inOpInfos];
+        return ['preOp' => $preOpInfos, 'inOp' => $inOpInfos, 'postOp' => $postOpInfos];
     }
 
     public function besoinRelais(): bool
@@ -102,5 +103,26 @@ class Procedure
                 break;
         }
         return $inOp;
+    }
+
+
+    private function postOpAOD()
+    {
+        $postOp = [];
+        switch ($this->risqueHemorragique) {
+            case self::RISQUE_HEMO_FAIBLE:
+                $postOp = [
+                    'reprise' => true,
+                    'l-reprise' => 'J-0',
+                    'description' => "Reprise de l'AOD à l'heure habituelle au moins 6h post opération",
+                ];
+                break;
+            case self::RISQUE_HEMO_MODERE_ELEVE:
+
+                break;
+            case self::RISQUE_HEMO_TRES_ELEVE:
+                break;
+        }
+        return $postOp;
     }
 }
