@@ -18,7 +18,8 @@ body {
 }
 
 .flex-item {
-    background-color: rgb(73, 145, 129);
+    
+    background-color: #53777a;
     padding: 5px;
     margin: 10px;
     line-height: 20px;

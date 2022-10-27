@@ -1,7 +1,7 @@
 function SlimIt() {
     new SlimSelect({
         select: '#traitement',
-        placeholder: 'Choississez un traitement'
+        placeholder: 'Choississez un traitement',
     })
     new SlimSelect({
         select: '#renale',

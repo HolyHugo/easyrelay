@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require('./classes/Procedure.php');
+
+
 function dateChecking($dateJour, $dateIntervention)
 {
     return $dateIntervention > $dateJour;
@@ -8,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['submit'])) {
     header("Location:./index.php");
     die;
 }
+$fonctionRenale = $_POST['fonction-renale'] === '' ? 0 :  $_POST['fonction-renale'];
 $dateJour = DateTime::createFromFormat('Y-m-d', $_POST['date_jour']);
 $dateIntervention = DateTime::createFromFormat('Y-m-d', $_POST['date_intervention']);
 if (!dateChecking($dateJour, $dateIntervention)) {
@@ -23,6 +30,22 @@ $formatter = new IntlDateFormatter(
     'Europe/Paris',
     IntlDateFormatter::GREGORIAN
 );
+
+$exploded = explode('-', $_POST['type-ac']);
+$traitement = $exploded[1];
+$familleTraitement = $exploded[0];
+$procedure = new Procedure(
+    $traitement,
+    $familleTraitement,
+    $_POST['risque-hemorragique'],
+    $_POST['risque-thrombotique'],
+    $fonctionRenale,
+    $dateJour,
+    $dateIntervention
+);
+$infos = $procedure->getInformations();
+$arret = $infos['preOp'];
+$inOp = $infos['inOp'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,19 +68,23 @@ $formatter = new IntlDateFormatter(
                         Consultation du <?= $formatter->format($dateJour) ?>
                     </div>
                 </div>
-                <div class="timeline__item">
-                    <div class="timeline__content">
-                        Arret coagulant
+                <?php if ($arret['arret']) : ?>
+                    <div class="timeline__item">
+                        <div class="timeline__content">
+                            <p>Arret des anti-coagulant à <?= $arret['l-arret'] ?> le <?= $formatter->format($arret['d-arret']) ?></p>
+                            <p><?= $arret['description'] ?></p>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
                 <div class="timeline__item">
                     <div class="timeline__content">
                         Intervention prévue le <?= $formatter->format($dateIntervention) ?>
+                        <p><?= $inOp['description'] ?></p>
                     </div>
                 </div>
                 <div class="timeline__item">
                     <div class="timeline__content">
-                        Reprise coagulant
+                        Reprise anti-coagulant
                     </div>
                 </div>
             </div>
