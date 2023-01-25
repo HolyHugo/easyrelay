@@ -89,14 +89,14 @@ class RechercheService
     public function createFilter(array $postData)
     {
         list($famille_traitement, $traitement) = explode('-', $postData['traitement']);
-
+        $fonctionRenale = $postData['fonction-renale'] ?? '';
         $filtrerValues = [
             $postData['risque-hemorragique'],
             $traitement,
             $famille_traitement,
             $postData['urgence'],
             $postData['risque-thrombotique'],
-            $postData['fonction-renale']
+            $fonctionRenale
         ];
         $filtrerString = "risque_hemorragique='%s' | traitement ~ '%s' | famille_traitement = '%s' | urgence='%s' | risque_thrombotique ~ '%s' | debit_renal ~ '%s'";
         return vsprintf($filtrerString, $filtrerValues);
@@ -150,7 +150,7 @@ class RechercheService
         $risqueHemorragique = self::getRecordsList('risque_h', $postData['risque-hemorragique']);
         $traitement = self::getRecordsList('traitement', $traitement);
         $famille_traitement = self::getRecordsList('famille_traitement', $famille_traitement);
-        if ($postData['fonction-renale'] !== '') {
+        if (($postData['fonction-renale'] ?? '') !== '') {
             $fonctionRenale = self::getRecordsList('debit_renal', $postData['fonction-renale']);
             $risqueThrombotique = self::getRecordsList('risque_t', $postData['risque-thrombotique']);
         };

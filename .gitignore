@@ -1,0 +1,4 @@
+data/pb_data/data.db-shm
+data/pb_data/data.db-wal
+data/pb_data/logs.db-shm
+data/pb_data/logs.db-wal
