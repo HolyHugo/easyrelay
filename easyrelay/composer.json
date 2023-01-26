@@ -7,7 +7,8 @@
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.5",
-        "laravel/lumen-framework": "^9.0"
+        "laravel/lumen-framework": "^9.0",
+        "picocss/pico": "^1.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

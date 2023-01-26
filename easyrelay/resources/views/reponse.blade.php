@@ -9,18 +9,20 @@ const LABELS  = [
 ];
 ?>
 <!DOCTYPE html>
-<html data-theme="dark">
+<html id="theme" data-theme="dark">
 
 <head>
     <script src="{{ URL::asset('/js/timeline.min.js')}}"></script>
     <link href="{{ URL::asset('/css/timeline.min.css')}}" rel="stylesheet" />
     <script src="{{ URL::asset('/js/reponse.js')}}"></script>
-    <!-- <link href="{{ URL::asset('/css/reponse.css')}}" rel="stylesheet" /> -->
+    <link href="{{ URL::asset('/css/index.css')}}" rel="stylesheet" />
     <link href="{{ URL::asset('/css/pico.min.css') }}" rel="stylesheet" />
 
 </head>
 
 <body>
+    
+<button onclick="window.location='{{url("/") }}'" class="retour-tap contrast">Retour </button>
     <main class="container">
         <div>
             <h2>Rappel des critères.</h2>
@@ -75,6 +77,7 @@ const LABELS  = [
             </div>
         </div>
     </main>
+    <button class="theme-tap contrast  theme-switcher"><i class="theme-switcher" id="theme-label">Mode jour 🌞</i></button>
 </body>
 
 </html>
