@@ -2,6 +2,7 @@
 <html id="theme" data-theme="dark">
 
 <head>
+    <title><?= env("APP_NAME") ?></title>
     <link href="css/index.css" rel="stylesheet" />
     <link href="css/flash.min.css" rel="stylesheet" />
     <link href="css/pico.min.css" rel="stylesheet" />

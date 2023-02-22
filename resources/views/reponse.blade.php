@@ -12,6 +12,7 @@ const LABELS  = [
 <html id="theme" data-theme="dark">
 
 <head>
+    <title><?= env("APP_NAME") ?></title>
     <script src="js/timeline.min.js"></script>
     <link href="css/timeline.min.css" rel="stylesheet" />
     <script src="js/reponse.js"></script>
