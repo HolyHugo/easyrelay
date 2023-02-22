@@ -2,11 +2,11 @@
 <html id="theme" data-theme="dark">
 
 <head>
-    <link href="{{ URL::asset('/css/index.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('/css/flash.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('/css/pico.min.css') }}" rel="stylesheet" />
-    <script src="{{ URL::asset('/js/index.js') }}"></script>
-    <script src="{{ URL::asset('/js/flash.min.js') }}"> </script>
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/flash.min.css" rel="stylesheet" />
+    <link href="css/pico.min.css" rel="stylesheet" />
+    <script src="js/index.js"></script>
+    <script src="js/flash.min.js"> </script>
 </head>
 
 <body>

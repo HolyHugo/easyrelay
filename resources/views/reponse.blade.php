@@ -12,11 +12,11 @@ const LABELS  = [
 <html id="theme" data-theme="dark">
 
 <head>
-    <script src="{{ URL::asset('/js/timeline.min.js')}}"></script>
-    <link href="{{ URL::asset('/css/timeline.min.css')}}" rel="stylesheet" />
-    <script src="{{ URL::asset('/js/reponse.js')}}"></script>
-    <link href="{{ URL::asset('/css/index.css')}}" rel="stylesheet" />
-    <link href="{{ URL::asset('/css/pico.min.css') }}" rel="stylesheet" />
+    <script src="js/timeline.min.js"></script>
+    <link href="css/timeline.min.css" rel="stylesheet" />
+    <script src="js/reponse.js"></script>
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/pico.min.css" rel="stylesheet" />
 
 </head>
 
