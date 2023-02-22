@@ -4,10 +4,17 @@
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/HolyHugo/pocketbase-php-sdk"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/lumen-framework": "^9.0",
+        "mkay-development/pocketbase-php-sdk": "dev-er-temp",
         "picocss/pico": "^1.5"
     },
     "require-dev": {

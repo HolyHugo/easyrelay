@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use DateTime;
-use Illuminate\Support\Facades\Http;
 use IntlDateFormatter;
+use Pb\Client as pb;
 
 class RechercheService
 {
@@ -13,14 +13,20 @@ class RechercheService
     const PERIODE_IN_OP = 'infos_inop';
     const PERIODE_POST_OP = 'infos_postop';
 
+    private $pb;
+
+    public function __construct()
+    {
+        $this->pb = new pb(env('PB_URL'));
+    }
     /**
      * @return array 
      */
     public function getTraitementsList(): array
     {
         $listeTraitements = [];
-        $traitements = Http::get('http://localhost:8090/api/collections/traitement/records')['items'];
-        $familles_traitements = Http::get('http://localhost:8090/api/collections/famille_traitement/records')['items'];
+        $traitements = $this->pb->collection('traitement')->getFullList()['items'];
+        $familles_traitements = $this->pb->collection('famille_traitement')->getFullList()['items'];
         foreach ($familles_traitements as $famille) {
             foreach ($traitements as $traitement) {
                 if ($traitement['famille'] === $famille['id']) {
@@ -40,11 +46,11 @@ class RechercheService
     {
         $listeRecords = [];
         if ($id !== '') {
-            $records = Http::get('http://localhost:8090/api/collections/' . $collection . '/records/' . $id);
-            $listeRecords[$collection] = json_decode($records->body(), true)['libelle'];
+            $records = $this->pb->collection($collection)->getOne($id);
+            $listeRecords[$collection] = $records['libelle'];
             return $listeRecords;
         }
-        $records = Http::get('http://localhost:8090/api/collections/' . $collection . '/records')['items'];
+        $records = $this->pb->collection($collection)->getFullList()['items'];
         foreach ($records as $key => $value) {
             $listeRecords[$value['id']] = $value['libelle'];
         }
@@ -57,7 +63,7 @@ class RechercheService
      */
     public function getScenario(String $filter)
     {
-        return Http::get("http://localhost:8090/api/collections/scenario/records", ['filter' => $filter])['items'] ?? [];
+        return $this->pb->collection('scenario')->getFullList(200,[$filter])['items'] ?? [];
     }
 
 
@@ -69,7 +75,8 @@ class RechercheService
     public function getScenarioInfos(String $scenario, String $periode, IntlDateFormatter $formatter, DateTime $dateIntervention)
     {
         $infosDone = [];
-        $infos = Http::get("http://localhost:8090/api/collections/$periode/records?filter=scenario ~ '$scenario'")['items'] ?? [];
+        $filter = "scenario ~ '$scenario'";
+        $infos = $this->pb->collection($periode)->getFullList(200,['filter'=> $filter])['items'] ?? [];
         if ($periode != self::PERIODE_IN_OP  &&  !empty($infos)) {
             foreach ($infos as $info) {
                 $dateJ = clone $dateIntervention;
@@ -98,7 +105,7 @@ class RechercheService
             $postData['risque-thrombotique'],
             $fonctionRenale
         ];
-        $filtrerString = "risque_hemorragique='%s' | traitement ~ '%s' | famille_traitement = '%s' | urgence='%s' | risque_thrombotique ~ '%s' | debit_renal ~ '%s'";
+        $filtrerString = "risque_hemorragique='%s' '&''&' traitement ~ '%s' '&''&' famille_traitement = '%s' '&''&' urgence='%s' '&''&' risque_thrombotique ~ '%s' '&''&' debit_renal ~ '%s'";
         return vsprintf($filtrerString, $filtrerValues);
     }
 
@@ -133,7 +140,7 @@ class RechercheService
             'preOpInfos' => $preOpInfos,
             'inOpInfos' => $inOpInfos,
             'postOpInfos' => $postOpInfos,
-            'formartter' => $formatter
+            'formatter' => $formatter
         ];
     }
 
