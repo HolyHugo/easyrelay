@@ -23,7 +23,7 @@ const LABELS  = [
 
 <body>
     
-<button onclick="window.location='{{url("/") }}'" class="retour-tap contrast">Retour </button>
+<button onclick="window.location='/'" class="retour-tap contrast">Retour </button>
     <main class="container">
         <div>
             <h2>Rappel des critères.</h2>
